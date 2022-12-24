@@ -18,7 +18,7 @@ public class TransferenciaController {
         return transferenciaService.getAllTransferencias();
     }
 
-    @GetMapping("{idConta}")
+    @GetMapping("/conta/{idConta}")
     public List<Transferencia> getByConta(@PathVariable Long idConta) {
         return transferenciaService.getTransferenciasPorConta(idConta);
     }
@@ -57,5 +57,10 @@ public class TransferenciaController {
         }
 
         return transferenciaService.getTransferenciasPorOperadorEPeriodo(operador, dataInicio, dataFim);
+    }
+
+    @PostMapping
+    public void addTransferencia(@RequestBody Transferencia transferencia) {
+        transferenciaService.addTransferencia(transferencia);
     }
 }

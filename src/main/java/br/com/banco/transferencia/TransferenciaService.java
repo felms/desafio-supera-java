@@ -63,15 +63,17 @@ public class TransferenciaService {
 
     public List<Transferencia> getTransferenciasPorOperadorEPeriodo(String operadorTransacao,
                                                                     String dataInicio, String dataFim){
-
         Conta conta = contaRepository.findByNomeResponsavel(operadorTransacao);
-
         return getTransferenciasPorPeriodo(dataInicio, dataFim)
                 .stream().filter(transferencia -> {
                     Conta c = transferencia.getConta();
                     return Objects.equals(c.getId(), conta.getId());
                 })
                 .collect(Collectors.toList());
+    }
+
+    public void addTransferencia(Transferencia transferencia) {
+        transferenciaRepository.save(transferencia);
     }
 
 }
